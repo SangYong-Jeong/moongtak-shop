@@ -10,7 +10,7 @@ const method = require('./middlewares/method-mw');
 const logger = require('./middlewares/morgan-mw');
 // const session = require('./middlewares/session-mw');
 const locals = require('./middlewares/locals-mw');
-const { sequelize } = require('./models');
+// const { sequelize } = require('./models');
 
 /*************** sequelize init **************/
 // require('./modules/sequelize-init')(sequelize); // 실제 DBMS랑 연동시켜줘
