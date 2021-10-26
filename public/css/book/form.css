@@ -1,0 +1,28 @@
+.form-wrapper {}
+
+.form-wrapper table {width: 100%; border: 1px solid #ddd;}
+.form-wrapper table td {padding: .75em; border-bottom: 1px solid #dfdfdf;}
+.form-wrapper table td.title {width: 160px;} /*  */
+.form-wrapper table textarea {height: 160px;}
+.form-wrapper table td.require::after {display: inline-block; content: '*'; color: #f10; margin-left: .5em; font-size: 1.25em;}
+
+.form-wrapper .file-wrap {display: flex; align-items: flex-end; margin-bottom: .5em; padding-bottom: .5em; border-bottom: 1px dotted #ccc;}
+.form-wrapper .file-wrap .img {width: 80px; margin-right: .5em;}
+.form-wrapper .file-wrap .file {margin-right: .5em;}
+
+.form-wrapper .mo-cover-wrap {display: flex;}
+.form-wrapper .mo-upfile-wrap {display: flex;}
+.form-wrapper .mo-cover-wrap .mo-cover {display: none;}
+.form-wrapper .mo-upfile-wrap .mo-upfile {display: none;}
+
+@media screen and (max-width: 575px) {
+  .form-wrapper table tr:nth-child(1) td.title {display: none;}
+  .form-wrapper table tr:nth-child(2) td.title {display: none;}
+  .form-wrapper table tr:nth-child(3) td.title {display: none;}
+  .form-wrapper table tr:nth-child(4) td.title {display: none;}
+  .form-wrapper table tr:nth-child(5) td.title {display: none;}
+
+  .form-wrapper .mo-cover-wrap .mo-cover {display: block; width: 70px; text-align: left; font-size: .875em; line-height: 22px; border: 2px solid mediumaquamarine; margin-right: .75em; text-align: center;} 
+  .form-wrapper .mo-upfile-wrap .mo-upfile {display: block; width: 70px; font-size: .875em; line-height: 22px; border: 2px solid mediumaquamarine; margin-right: .75em; text-align: center;}
+
+}
