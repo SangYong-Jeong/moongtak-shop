@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.send('/admin/user');
+  res.render('admin/user/user-list', { css: 'admin-user' });
 });
 
 router.post('/', (req, res, next) => {
