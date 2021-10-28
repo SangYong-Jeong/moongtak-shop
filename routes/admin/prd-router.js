@@ -3,7 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.render('admin/prd/prd-list', { css: 'admin-prd' });
+  if (req.query.type === 'update') {
+    res.render('admin/prd/prd-update', { css: 'admin-prd' });
+  } else {
+    res.render('admin/prd/prd-list', { css: 'admin-prd' });
+  }
 });
 
 router.post('/', (req, res, next) => {

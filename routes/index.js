@@ -3,6 +3,7 @@ shop.moongtak.com/admin/
 [GET]     shop.moongtak.com/admin/login                   - 로그인 화면
 [POST]    shop.moongtak.com/admin/login                   - 로그인 처리
 [GET]     shop.moongtak.com/admin/logout                  - 로그아웃 처리
+[GET]     shop.moongtak.com/admin/main                    - 메인 화면
 
 [GET]     shop.moongtak.com/admin/user?page=1             - 회원리스트
 [GET]     shop.moongtak.com/admin/user/1                  - 회원내용
