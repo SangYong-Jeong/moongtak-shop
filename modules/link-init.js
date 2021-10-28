@@ -2,7 +2,7 @@ module.exports = {
   admin: {
     index: [],
     main: [
-      { path: '/admin', link: '/admin/main', src: 'b0' },
+      { path: '/admin/main', link: '/admin/main', src: 'b0' },
       {
         path: '/admin/user',
         link: '/admin/user',
@@ -46,6 +46,14 @@ module.exports = {
     prd: [
       { path: '/admin/prd', name: '상품 관리' },
       { path: '/admin/cate', name: '카테고리 관리' },
+    ],
+    cate: [
+      { path: '/admin/prd', name: '상품 관리' },
+      { path: '/admin/cate', name: '카테고리 관리' },
+    ],
+    binit: [
+      { path: '/admin/binit', name: '게시판 관리' },
+      { path: '/admin/board', name: '게시물 관리' },
     ],
     board: [
       { path: '/admin/binit', name: '게시판 관리' },
