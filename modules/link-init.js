@@ -8,7 +8,7 @@ module.exports = {
         link: '/admin/user',
         src: 'b1',
       },
-      { path: ['/admin/prd', 'admin/cate'], link: '/admin/prd', src: 'b2' },
+      { path: ['/admin/prd', '/admin/cate'], link: '/admin/prd', src: 'b2' },
       {
         path: '/admin/order',
         link: '/admin/order',
@@ -19,11 +19,11 @@ module.exports = {
         link: '/admin/board',
         src: 'b4',
       },
-      {
+      /* {
         path: '/admin/system',
         link: '/admin/system',
         src: 'b6',
-      },
+      }, */
       {
         path: '//analytics.google.com',
         link: '/admin/analytics',
