@@ -8,11 +8,6 @@
       </div>
     </li>
   </ul>
-  <%- // inlcude('../inc/pager.ejs') %> 
+  <%- //include('../inc/pager.ejs') %> 
 </article>
-<script>
-  $('.board-container .list-page.gallery-type .list').click(onBoardListClick);
-  function onBoardListClick () {
-    location.href = $(this).data('link') + '?type=gallery';
-  }
-</script>
+<script src="/js/board/board.js"></script>

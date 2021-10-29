@@ -50,7 +50,7 @@ a:not(.btn) {
 }
 
 .wrapper {
-  width: 96%;
+  width: 100%;
   max-width: 1140px;
   margin: auto;
 }
@@ -126,7 +126,7 @@ section.wrapper {
   .nav-item.show {
     .nav-link {
       color: $primary-color;
-      border-color: #dee2e6 #dee2e6 fff;
+      border-color: #dee2e6 #dee2e6 #fff;
     }
   }
   .nav-link {

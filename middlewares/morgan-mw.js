@@ -7,6 +7,5 @@ const stream = rfs.createStream('access.log', {
 	path: path.join(__dirname, '../log')
 });
 
-// const logger = morgan('tiny', { stream });
 const logger = morgan('combined', { stream });
 module.exports = logger;

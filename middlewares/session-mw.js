@@ -1,6 +1,6 @@
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session)
-const {pool} = require('../modules/mysql-init')
+const { pool } = require('../modules/mysql-init')
 
 const storeOptions = {
 	expiration: 86400000,

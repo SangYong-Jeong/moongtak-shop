@@ -1,5 +1,4 @@
 module.exports = (sequelize, DataType) => {
-  // define("객체명", "객체속성", "객체옵션")
   const Test = sequelize.define(
     'Test',
     {
@@ -16,5 +15,6 @@ module.exports = (sequelize, DataType) => {
       paranoid: true,
     }
   );
+
   return Test;
 };

@@ -8,7 +8,11 @@ module.exports = {
         link: '/admin/user',
         src: 'b1',
       },
-      { path: ['/admin/prd', '/admin/cate'], link: '/admin/prd', src: 'b2' },
+      {
+        path: ['/admin/prd', '/admin/cate'],
+        link: '/admin/prd',
+        src: 'b2',
+      },
       {
         path: '/admin/order',
         link: '/admin/order',
@@ -16,7 +20,7 @@ module.exports = {
       },
       {
         path: ['/admin/board', '/admin/binit'],
-        link: '/admin/board',
+        link: '/admin/binit',
         src: 'b4',
       },
       /* {
@@ -31,18 +35,8 @@ module.exports = {
         target: '_blank',
       },
     ],
-    user: [
-      {
-        path: '/admin/user',
-        name: '회원 관리',
-      },
-    ],
-    order: [
-      {
-        path: '/admin/order',
-        name: '주문 관리',
-      },
-    ],
+    user: [{ path: '/admin/user', name: '회원 관리' }],
+    order: [{ path: '/admin/order', name: '주문 관리' }],
     prd: [
       { path: '/admin/prd', name: '상품 관리' },
       { path: '/admin/cate', name: '카테고리 관리' },
@@ -60,4 +54,4 @@ module.exports = {
       { path: '/admin/board', name: '게시물 관리' },
     ],
   },
-};
+}
