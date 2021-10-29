@@ -31,20 +31,19 @@
         <tr>
           <td class="title">요약설명</td>
           <td>
-            <textarea name="content" class="form-control" placeholder="내용을 입력하세요."
-              style="min-height: 200px;"></textarea>
+            <textarea name="content" class="form-control" placeholder="내용을 입력하세요." style="min-height: 200px;"></textarea>
           </td>
         </tr>
         <tr>
           <td colspan="2">
-            <div name="content" id="editor" style="min-height: 200px;"></div>
+            <div id="editor" style="min-height: 200px;"></div>
           </td>
         </tr>
         <tr>
           <td>이미지 첨부</td>
           <td>
-            <% for (let i=1; i<=10; i++) { %>
-            <input type="file" name="img" class="form-control-file mb-2">
+            <% for(let i=1; i<=10; i++) { %> 
+              <input type="file" name="img" class="form-control-file mb-2">
             <% } %>
           </td>
         </tr>

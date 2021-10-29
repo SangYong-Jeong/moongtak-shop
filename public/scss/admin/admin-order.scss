@@ -1,4 +1,5 @@
 @import '../common';
+@import '../common';
 
 .order-wrapper {
   &.list-wrapper {
@@ -38,8 +39,8 @@
   &.form-wrapper {
     table.tbl-prd {
       td.td-icon {
-        width: 120px;
         padding: 0.25em;
+        width: 120px;
         height: 80px;
         img {
           max-width: 100%;
