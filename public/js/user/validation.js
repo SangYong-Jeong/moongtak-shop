@@ -5,7 +5,6 @@ passwd : 6 ~ 24
 passwd === passwd2
 email 검증
 */
-
 (function initValidation(form) {
   var ERR_API = '에러가 발생했습니다.';
 
@@ -49,10 +48,7 @@ email 검증
     if (isPasswd && isPasswd2 && isPasswdEqual && isUsername) {
       axios
         .get('/api/verify', {
-          params: {
-            key: 'userid',
-            value: useridEl.value.trim(),
-          },
+          params: { key: 'userid', value: useridEl.value.trim() },
         })
         .then(function (r) {
           if (!r.data)
@@ -61,10 +57,7 @@ email 검증
             verifyTrue(useridEl, useridTxt, '사용할 수 있습니다.');
             axios
               .get('/api/verify', {
-                params: {
-                  key: 'email',
-                  value: emailEl.value.trim(),
-                },
+                params: { key: 'email', value: emailEl.value.trim() },
               })
               .then(function (r) {
                 if (!r.data)
@@ -106,12 +99,7 @@ email 검증
       );
     } else {
       axios
-        .get('/api/verify', {
-          params: {
-            key: 'userid',
-            value: userid,
-          },
-        })
+        .get('/api/verify', { params: { key: 'userid', value: userid } })
         .then(function (r) {
           if (r.data)
             validId = verifyTrue(useridEl, useridTxt, '사용할 수 있습니다.');
@@ -191,10 +179,7 @@ email 검증
     } else {
       axios
         .get('/api/verify', {
-          params: {
-            key: 'email',
-            value: email,
-          },
+          params: { key: 'email', value: email },
         })
         .then(function (r) {
           if (r.data) validEmail = verifyTrue(emailEl, emailTxt);
