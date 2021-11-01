@@ -1,3 +1,5 @@
+const User = require('./User');
+
 module.exports = (sequelize, DataType) => {
   const Board = sequelize.define(
     'Board',
@@ -30,5 +32,10 @@ module.exports = (sequelize, DataType) => {
       paranoid: true,
     }
   );
+
+  Board.associate = (models) => {
+    Board.belongsTo(models.User);
+  };
+
   return Board;
 };
