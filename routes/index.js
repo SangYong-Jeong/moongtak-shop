@@ -5,11 +5,12 @@ shop.motive.co.kr/admin/
 [GET]     shop.motive.co.kr/admin/logout  - 로그아웃 처리
 [GET]     shop.motive.co.kr/admin/main    - 메인 화면
 
-[GET]     shop.motive.co.kr/admin/user?page=1   - 회원리스트
-[GET]     shop.motive.co.kr/admin/user/1 - 회원내용
+[GET]     shop.motive.co.kr/admin/user?page=1        - 회원리스트
+[GET]     shop.motive.co.kr/admin/user?type=create   - 회원리스트
+[GET]     shop.motive.co.kr/admin/user/1             - 회원내용
 [GET]     shop.motive.co.kr/admin/user/1?type=update - 회원내용 수정 화면
-[PUT]     shop.motive.co.kr/admin/user    - 회원내용수정(저장)
-[DELETE]  shop.motive.co.kr/admin/user    - 회원삭제
+[PUT]     shop.motive.co.kr/admin/user                - 회원내용수정(저장)
+[DELETE]  shop.motive.co.kr/admin/user                - 회원삭제
 
 [GET]     shop.motive.co.kr/admin/cate   - 카테고리 리스트
 [GET]     shop.motive.co.kr/admin/cate/1 - 카테고리 내용
