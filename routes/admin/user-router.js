@@ -5,18 +5,30 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const { error, telNumber, alert } = require('../../modules/util');
 const { User } = require('../../models');
+const pager = require('../../middlewares/pager-mw');
 
-// 회원리스트
+// 회원 리스트
+router.get('/', pager(User), async (req, res, next) => {
+  if (req.query.type === 'create') next();
+  else {
+    const ejs = { telNumber };
+    const users = await User.findAll({
+      order: [['id', 'desc']],
+      offset: req.pager.startIdx,
+      limit: req.pager.listCnt,
+    });
+    res.json({ pager: req.pager, users });
+    // res.render('admin/user/user-list', ejs);
+  }
+});
+
+// 회원 등록 화면
 router.get('/', (req, res, next) => {
   const ejs = {
     telNumber,
     type: req.query.type || '',
   };
-  if (ejs.type === 'create') {
-    res.render('admin/user/user-form', ejs);
-  } else {
-    res.render('admin/user/user-list', ejs);
-  }
+  res.render('admin/user/user-form', ejs);
 });
 
 // 회원 수정 화면
@@ -31,8 +43,7 @@ router.get('/:id', (req, res, next) => {
 // 회원 저장
 router.post('/', async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
-    user.save();
+    await User.create(req.body);
     res.send(alert('회원가입이 완료되었습니다.', '/admin/user'));
   } catch (err) {
     next(createError(err));
