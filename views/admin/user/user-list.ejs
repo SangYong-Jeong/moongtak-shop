@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <% for (let v of users) { %> 
+      <% for(let v of users) { %> 
       <tr>
         <td rowspan="2"><%= v.id %></td>
         <td>
@@ -30,7 +30,7 @@
         <td><%= v.level %></td>
         <td rowspan="2">
           <a href="/<%= currents[0] %>/<%= currents[1] %>/<%= v.id %>" class="btn btn-success">수정</a>
-          <form action="/<%= currents[0] %>/<%= currents[1] %>" method="post" class="d-inline-block">
+          <form action="/<%= currents[0] %>/<%= currents[1] %>" method="POST" class="d-inline-block">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="id" value="<%= v.id %>">
             <button class="btn btn-danger">삭제</button>
@@ -40,16 +40,14 @@
       <tr>
         <td colspan="5" class="text-left">
           <div>
-            도로명주소 :
-            <%- v.addr1 %> 
+            도로명주소 : <%- v.addr1 %>
           </div>
           <div>
-            지번명주소 : 
-            <%- v.addr2 %> 
+            지번명주소 : <%- v.addr2 %>
           </div>
         </td>
       </tr>
-      <% } %> 
+      <% } %>
     </tbody>
   </table>
   <div class="pager-wrap">
