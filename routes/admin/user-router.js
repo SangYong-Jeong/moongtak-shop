@@ -62,7 +62,7 @@ router.put('/', async (req, res, next) => {
     req.body.tel = getStringTel(req.body.tel1, req.body.tel2, req.body.tel3);
     const [rs] = await User.update(req.body, { where: { id: req.body.id } });
     if (rs) res.send(alert('회원수정이 완료되었습니다.', '/admin/user'));
-    else res.send(alert('처리되지 않았습니다.', '/admin/user'));
+    else res.send(alert('처리되지 않았습니다', '/admin/user'));
   } catch (err) {
     next(createError(err));
   }

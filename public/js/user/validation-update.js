@@ -1,7 +1,5 @@
 $('form[name="userForm"]').submit(onSubmitUserForm);
-
 function onSubmitUserForm(e) {
-  console.log(e);
   e.preventDefault();
   var f = this;
   var usernameEl = f.username;
@@ -10,7 +8,7 @@ function onSubmitUserForm(e) {
   var email = emailEl.value.trim();
   if (username === '') {
     alert('이름을 입력하세요.');
-    f.username.focus();
+    usernameEl.focus();
     return false;
   }
   if (validator.isEmail(email)) {
