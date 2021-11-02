@@ -73,9 +73,6 @@ module.exports = (sequelize, { DataTypes, Op }) => {
       },
       tel: {
         type: DataTypes.STRING(14),
-        validate: {
-          len: [11, 14],
-        },
       },
     },
     {
