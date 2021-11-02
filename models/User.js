@@ -25,7 +25,6 @@ module.exports = (sequelize, { DataTypes, Op }) => {
         allowNull: false,
         /* set(value) {
           const { BCRYPT_SALT: salt, BCRYPT_ROUND: rnd } = process.env;
-          const my = this;
           const hash = bcrypt.hashSync(value + salt, Number(rnd));
           this.setDataValue('userpw', hash);
         }, */
@@ -37,6 +36,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
       email: {
         type: DataTypes.STRING(255),
         allowNull: false,
+        unique: true,
         validate: {
           isEmail: true,
         },
@@ -119,5 +119,6 @@ module.exports = (sequelize, { DataTypes, Op }) => {
     const users = generateUser(rs);
     return users;
   };
+
   return User;
 };
