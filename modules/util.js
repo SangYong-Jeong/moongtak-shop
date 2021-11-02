@@ -91,8 +91,6 @@ const alert = (msg, loc = '/') => {
 
 const generateUser = (_users) => {
   const users = _users.map((v) => {
-    v.tel =
-      v.tel1 && v.tel2 && v.tel3 ? v.tel1 + '-' + v.tel2 + '-' + v.tel3 : '';
     v.addr1 =
       v.addrPost && v.addrRoad
         ? `[${v.addrPost}]
@@ -132,6 +130,15 @@ const generateUser = (_users) => {
   return users;
 };
 
+const getStringTel = (t1, t2, t3) => {
+  console.log(arguments);
+  return t1 && t2 && t3 ? t1 + '-' + t2 + '-' + t3 : '';
+};
+
+const getArrayTel = (tel) => {
+  return tel.includes('-') ? tel.split('-') : [];
+};
+
 module.exports = {
   location,
   cutTail,
@@ -145,4 +152,6 @@ module.exports = {
   alert,
   telNumber,
   generateUser,
+  getStringTel,
+  getArrayTel,
 };
