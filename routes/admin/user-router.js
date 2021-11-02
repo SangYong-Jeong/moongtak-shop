@@ -1,9 +1,10 @@
 const path = require('path');
 const express = require('express');
-const createError = require('http-errors');
 const router = express.Router();
+const createError = require('http-errors');
 const { error, telNumber, alert, generateUser } = require('../../modules/util');
-const { User } = require('../../models');
+const { User, Sequelize } = require('../../models');
+const { Op } = Sequelize;
 const pager = require('../../middlewares/pager-mw');
 
 // 회원 등록 화면
@@ -17,16 +18,16 @@ router.get('/', (req, res, next) => {
   } else next();
 });
 
-// 회원 리스트
+// 회원리스트
 router.get('/', pager(User), async (req, res, next) => {
-  const rs = await User.findAll({
-    order: [['id', 'desc']],
-    offset: req.pager.startIdx,
-    limit: req.pager.listCnt,
-  });
-  const users = generateUser(rs);
-  const ejs = { telNumber, pager: req.pager, users };
-  res.render('admin/user/user-list', ejs);
+  try {
+    let { field = 'id', search = '', sort = 'desc' } = req.query;
+    const users = await User.searchUser(req.query, req.pager);
+    const ejs = { telNumber, pager: req.pager, users, field, sort, search };
+    res.render('admin/user/user-list', ejs);
+  } catch (err) {
+    next(createError(err));
+  }
 });
 
 // 회원 수정 화면
@@ -41,7 +42,8 @@ router.get('/:id', (req, res, next) => {
 // 회원 저장
 router.post('/', async (req, res, next) => {
   try {
-    await User.create(req.body);
+    const user = await User.create(req.body);
+    user.save();
     res.send(alert('회원가입이 완료되었습니다.', '/admin/user'));
   } catch (err) {
     next(createError(err));
