@@ -27,6 +27,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
       useFile: {
         type: DataTypes.ENUM,
         values: ['0', '1', '2'],
+        allowNull: false,
         defaultValue: '0',
       },
       useComment: {
