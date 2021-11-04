@@ -2,8 +2,8 @@
   <select name="tblId" class="form-control" onchange="goLocation(this);">
     <option value="">선택하세요</option>
     <% for(let v of boardLists) { %> 
-    <option value="/<%= currents[0] %>/<%= currents[1] %>?boardId=<%= v.id %>" <%= (v.id == boardId) ? 'selected' : '' %>><%= v.title %></option>
-    <% } %> 
+      <option value="/<%= currents[0] %>/<%= currents[1] %>?boardId=<%= v.id%> " <%= (v.id == boardId) ? 'selected' : ''%>><%= v.title %></option>
+    <% } %>
   </select>
 </div>
 <script>

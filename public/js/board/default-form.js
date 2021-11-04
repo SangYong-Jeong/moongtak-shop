@@ -1,5 +1,3 @@
-const { alert } = require('../../../modules/util');
-
 $('form[name="defaultForm"]').submit(onFormSubmit);
 function onFormSubmit(e) {
   e.preventDefault();
@@ -8,8 +6,8 @@ function onFormSubmit(e) {
   var writerEl = f.writer;
   var contentEl = f.content;
   var title = titleEl.value.trim();
-  var writer = writer.value.trim();
-  var content = content.value.trim();
+  var writer = writerEl.value.trim();
+  var content = contentEl.value.trim();
   if (title === '') {
     alert('제목은 필수사항 입니다.');
     titleEl.focus();
@@ -17,12 +15,12 @@ function onFormSubmit(e) {
   }
   if (writer === '') {
     alert('작성자는 필수사항 입니다.');
-    writerEl.focus();
+    titleEl.focus();
     return false;
   }
   if (content === '') {
     alert('내용은 필수사항 입니다.');
-    contentEl.focus();
+    titleEl.focus();
     return false;
   }
   f.submit();
