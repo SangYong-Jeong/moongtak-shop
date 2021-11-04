@@ -37,8 +37,8 @@ router.get('/:id', (req, res, next) => {
 router.post(
   '/',
   uploader.fields([{ name: 'img' }, { name: 'pds' }]),
-  boardInit('body'),
   afterUploader(['img', 'pds']),
+  boardInit('body'),
   async (req, res, next) => {
     try {
       req.body.user_id = 1; // 회원작업 후 수정 예정
