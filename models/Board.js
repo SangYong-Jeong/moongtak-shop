@@ -73,35 +73,43 @@ module.exports = (sequelize, { DataTypes, Op }) => {
 
   Board.getCount = async function (query) {
     return await this.count({
-      where: { ...sequelize.getWhere(query), binit_id: query.boardId },
+      where: {
+        [Op.and]: [
+          { ...sequelize.getWhere(query) },
+          { binit_id: query.boardId },
+        ],
+      },
     });
   };
 
   Board.searchList = async function (query, BoardFile, BoardInit) {
-    let { field = 'id', sort = 'desc', boardId, page = 1 } = query;
+    let { field, sort, boardId, page } = query;
     if (!boardId) {
       let { id } = await BoardInit.findOne({
-        attributes: ['id'],
+        attributes: ['id', 'boardType'],
         order: [['id', 'asc']],
         offset: 0,
         limit: 1,
       });
       boardId = id;
+      query.boardId = boardId;
     }
-
+    const { boardType } = await BoardInit.findOne({
+      where: { id: boardId },
+      raw: true,
+    });
+    let listCnt = boardType === 'gallery' ? 12 : 5;
+    let pagerCnt = 5;
     const totalRecord = await this.getCount(query);
-    const pager = createPager(
-      page,
-      totalRecord,
-      (_listCnt = 5),
-      (_pagerCnt = 5)
-    );
+    const pager = createPager(page, totalRecord, listCnt, pagerCnt);
 
     const rs = await this.findAll({
       order: [[field, sort]],
       offset: pager.startIdx,
       limit: pager.listCnt,
-      where: { ...sequelize.getWhere(query), binit_id: boardId },
+      where: {
+        [Op.and]: [{ ...sequelize.getWhere(query) }, { binit_id: boardId }],
+      },
       include: [{ model: BoardFile, attributes: ['saveName'] }],
     });
     const lists = rs
