@@ -1,5 +1,5 @@
+'use strict';
 const numeral = require('numeral');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const insertUsers = [];
@@ -19,10 +19,10 @@ module.exports = {
         updatedAt: new Date(),
       });
     }
-    await queryInterface.bulkInsert('user', insertUsers);
+    await queryInterface.bulkInsert('User', insertUsers);
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('user', null, {});
+    await queryInterface.bulkDelete('User', null, {});
   },
 };
