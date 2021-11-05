@@ -1,11 +1,11 @@
 @import '../variables';
 @import '../mixins';
 
-.board-container {
-  &.gallery-type.list-page {
+.board-container.gallery-type {
+  &.list-page {
     overflow-x: hidden;
     .list-wrap {
-      // list 페이지
+      // list페이지
       @include flex($w: wrap);
       width: 101%;
       .list {
@@ -54,6 +54,15 @@
             opacity: 0.6;
           }
         }
+      }
+    }
+  }
+  &.view-page {
+    .td-content {
+      padding: inherit 0;
+      > div {
+        border: 1px solid $light-color;
+        min-height: 200px;
       }
     }
   }
