@@ -46,6 +46,7 @@ module.exports = (_field = 'query', addQuery = []) => {
         value: req[_field].boardType,
       });
     }
+
     next();
   };
 };
