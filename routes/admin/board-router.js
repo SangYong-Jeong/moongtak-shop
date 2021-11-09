@@ -23,8 +23,7 @@ router.get('/', boardInit(), queries(), async (req, res, next) => {
   try {
     const { lists, pager, totalRecord } = await Board.getLists(
       req.query,
-      BoardFile,
-      BoardInit
+      BoardFile
     );
     res.render('admin/board/board-list', { lists, pager, totalRecord });
   } catch (err) {
@@ -74,6 +73,7 @@ router.post(
         await Board.update(req.body, { where: { id: req.body.id } });
         req.files.forEach((file) => (file.board_id = req.body.id));
         const files = await BoardFile.bulkCreate(req.files);
+        // res.json({ file: req.files, req: req.body, locals: res.locals });
         res.redirect(res.locals.goList);
       } else {
         req.body.user_id = 1; // 회원작업 후 수정 예정
