@@ -45,7 +45,7 @@
         @include layer($r: 0.25em, $b: 0.25em);
       }
       form[name='deleteCommentForm'] {
-        position: absolute;
+        @include abs;
       }
     }
   }
