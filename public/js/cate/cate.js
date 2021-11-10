@@ -1,5 +1,19 @@
 var core = {};
-var plugins = ['contextmenu', 'dnd', 'search', 'state', 'wholerow', 'changed'];
+var plugins = [
+  'contextmenu',
+  'dnd',
+  'search',
+  'state',
+  'wholerow',
+  'changed',
+  'types',
+];
+
+var types = {
+  default: {
+    max_depth: 2,
+  },
+};
 
 core.themes = {
   variant: 'large',
@@ -18,37 +32,45 @@ core.data = {
 };
 
 function onChangedTree(e, data) {
-  /* var json = $('#jstreeWrap').jstree(true).get_json('#');
-  axios
-    .post('/api/tree', { json })
-    .then(function (r) {
-      console.log(r);
-    })
-    .catch(function (err) {
-      console.log(err);
-    }); */
+  console.log(data.node.id);
 }
 
 function onCreateTree(e, data) {
-  console.log(data);
+  axios
+    .post('/api/tree', { node: data.node })
+    .then(function (r) {
+      $('#jstreeWrap').jstree().refresh();
+    })
+    .catch(function (err) {
+      console.log('============');
+      console.log('== create ==');
+      console.log(err);
+      console.log('============');
+    });
+}
+
+function onDeleteTree(e, data) {
+  console.log(data.node.id);
 }
 
 function onUpdateTree() {
   var json = $('#jstreeWrap').jstree(true).get_json('#');
   axios
-    .post('/api/tree', { json })
+    .put('/api/tree', { json })
     .then(function (r) {
-      console.log('hi');
       $('#jstreeWrap').jstree().refresh();
     })
     .catch(function (err) {
+      console.log('============');
+      console.log('== update ==');
       console.log(err);
+      console.log('============');
     });
 }
 
 $('#jstreeWrap')
-  .jstree({ core: core, plugins: plugins })
+  .jstree({ core: core, plugins: plugins, types })
   .on('create_node.jstree', onCreateTree)
-  .on('rename_node.jstree', onUpdateTree)
+  .on('rename_node.jstree', onRenameTree)
   .on('move_node.jstree', onUpdateTree)
-  .on('delete_node.jstree', onUpdateTree);
+  .on('delete_node.jstree', onDeleteTree);
