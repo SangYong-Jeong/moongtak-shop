@@ -1,3 +1,21 @@
+// jsTree
+var core = {};
+var plugins = ['state', 'wholerow', 'changed', 'checkbox'];
+
+core.themes = {
+  variant: 'large',
+  striped: true,
+};
+
+core.check_callback = true;
+
+core.data = {
+  data: function (node) {
+    return { id: node.id };
+  },
+};
+
+// Quill
 var toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote', 'code-block'],
@@ -24,3 +42,25 @@ var quill = new Quill('#editor', {
   },
   theme: 'snow',
 });
+
+$('form[name="prdCreateForm"]').submit(onSubmitPrdCreateForm);
+function onSubmitPrdCreateForm(e) {
+  e.preventDefault();
+  var title = this.title.value.trim();
+  if (title === '') {
+    this.title.focus();
+    return false;
+  }
+  this.content.value = quill.root.innerHTML;
+  this.submit();
+}
+
+$('.form-wrapper .bt-cate').click(onClickCate);
+function onClickCate() {
+  axios
+    .get('/api/cate')
+    .then(function (r) {})
+    .catch(function (err) {
+      console.log(err);
+    });
+}
