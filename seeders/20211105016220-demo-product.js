@@ -13,12 +13,16 @@ module.exports = {
       'https://jsonplaceholder.typicode.com/posts'
     );
     for (let i = 0; i < posts.length; i++) {
+      if (i % 3 === 0) {
+        posts[i].body = '&lt;h2&gt;' + posts[i].body + '&lt;/h2&gt;';
+      }
       products.push({
         title: titles[Math.floor(Math.random() * 5)] + '_' + i,
         priceOrigin: Math.floor(Math.random() * 300000) + 30000,
         priceSale: Math.floor(Math.random() * 300000) + 30000,
         summary: posts[i].title,
         content: posts[i].body,
+        amount: i % 20 === 0 ? 0 : Math.floor(Math.random() * 1000),
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -27,6 +31,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('cate', null, {});
+    await queryInterface.bulkDelete('product', null, {});
   },
 };
