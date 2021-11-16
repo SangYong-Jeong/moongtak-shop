@@ -47,7 +47,10 @@ app.use(locals);
 
 /*************** logger init **************/
 app.use(logger);
-
+app.use((req, res, next) => {
+  console.log(req.user);
+  next();
+});
 /*************** router init **************/
 const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
