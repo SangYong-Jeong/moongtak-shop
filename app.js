@@ -12,7 +12,6 @@ const session = require('./middlewares/session-mw');
 const locals = require('./middlewares/locals-mw');
 const { isAdmin } = require('./middlewares/auth-mw');
 const { sequelize } = require('./models');
-
 /*************** sequelize init **************/
 require('./modules/sequelize-init')(sequelize, true);
 
@@ -47,10 +46,7 @@ app.use(locals);
 
 /*************** logger init **************/
 app.use(logger);
-app.use((req, res, next) => {
-  console.log(req.user);
-  next();
-});
+
 /*************** router init **************/
 const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
