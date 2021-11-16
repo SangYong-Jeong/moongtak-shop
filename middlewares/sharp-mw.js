@@ -10,7 +10,6 @@ module.exports = (width = 120) => {
         if (v.mimetype.includes('image')) {
           let loc = path.join(v.destination, './thumb');
           await ensureDir(loc);
-          console.log(v);
           v.thumb = await sharp(v.path)
             .resize(200)
             .jpeg({ mozjpeg: true })
