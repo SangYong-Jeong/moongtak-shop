@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 const helmet = require('helmet');
 const passport = require('passport');
-const cors = require('cors');
+const cors = require('./middlewares/cors-mw');
 const passportModule = require('./passport');
 const method = require('./middlewares/method-mw');
 const logger = require('./middlewares/morgan-mw');
@@ -33,7 +33,7 @@ app.set('views', './views');
 app.locals.pretty = true;
 
 /*************** middleware ***************/
-app.use(cors());
+app.use(cors([...process.env.CORS_URL.split(';')]));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(method());
