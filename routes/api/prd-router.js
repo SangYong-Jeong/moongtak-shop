@@ -1,32 +1,32 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-const queries = require('../../middlewares/query-mw')
-const { Product, ProductFile, CateProduct, Cate } = require('../../models')
+const queries = require('../../middlewares/query-mw');
+const { Product, ProductFile, CateProduct, Cate } = require('../../models');
+const { findLastId } = require('../../modules/util');
 
 // 리스트
 router.get('/', queries(), async (req, res, next) => {
   try {
-    const { lists, pager, totalRecord } = await Product.getLists(
-      req.query,
-      ProductFile
-    )
-    // res.json({ lists, pager, totalRecord });
-    res.render('admin/prd/prd-list', { lists, pager, totalRecord })
+    const [rs] = await Cate.getAllCate();
+    // const rs = await Cate.getChildren(req.query);
+    // const rs = await Cate.getProduct(req.query, Product, ProductFile);
+    const rs2 = findLastId(rs, []);
+    res.status(200).json(rs2);
   } catch (err) {
-    next(createError(err))
+    res.status(500).json(err);
   }
-})
+});
 
 // 상세페이지
 router.get('/:id', queries(), async (req, res, next) => {
   try {
-    const prd = await Product.findProduct(req.params.id, Cate, ProductFile)
-    const cate = prd.Cates.map((v) => v.id)
-    res.render('admin/prd/prd-update', { prd, cate, _ })
+    const prd = await Product.findProduct(req.params.id, Cate, ProductFile);
+    const cate = prd.Cates.map((v) => v.id);
+    res.render('admin/prd/prd-update', { prd, cate, _ });
   } catch (err) {
-    next(createError(err))
+    next(createError(err));
   }
-})
+});
 
-module.exports = { name: '/prd', router }
+module.exports = { name: '/prd', router };
