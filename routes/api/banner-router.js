@@ -1,16 +1,16 @@
-const path = require('path')
-const fs = require('fs-extra')
-const express = require('express')
-const { Op } = require('sequelize')
-const router = express.Router()
-const { Board, BoardFile } = require('../../models')
-const boardInit = require('../../middlewares/boardinit-mw')
+const path = require('path');
+const fs = require('fs-extra');
+const express = require('express');
+const { Op } = require('sequelize');
+const router = express.Router();
+const { Board, BoardFile } = require('../../models');
+const boardInit = require('../../middlewares/boardinit-mw');
 
 router.get(
   '/',
   (req, res, next) => {
-    req.boardId = 5
-    next()
+    req.boardId = 4;
+    next();
   },
   boardInit(),
   async (req, res, next) => {
@@ -19,15 +19,16 @@ router.get(
         req.query.id,
         null,
         BoardFile
-      )
-      console.log('======')
-      console.log(lists[0])
-      res.status(200).json({ list: lists[0] })
+      );
+      const list = { content: lists[0].content };
+      list.files = lists[0].BoardFiles.map((v) => v.saveName);
+      console.log(list);
+      res.status(200).json(list);
     } catch (err) {
-      console.log(err)
-      res.status(500).json(err)
+      console.log(err);
+      res.status(500).json(err);
     }
   }
-)
+);
 
-module.exports = { name: '/banner', router }
+module.exports = { name: '/banner', router };

@@ -25,7 +25,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
       charset: 'utf8',
       collate: 'utf8_general_ci',
       tableName: 'cate',
-      paranoid: true,
+      paranoid: false,
     }
   );
 
@@ -63,41 +63,74 @@ module.exports = (sequelize, { DataTypes, Op }) => {
 
   Cate.getProduct = async function (query, Product, ProductFile) {
     try {
-      const { cid = 'j1_1', field, search, sort } = query;
+      const { cid = 'j1_1', field, search, sort, grp } = query;
       const [allTree] = await this.getAllCate();
       const myTree = findObj(allTree, cid);
       const lastTree = findLastId(myTree, []);
 
-      const rs = await this.findAll({
-        where: {
-          id: { [Op.or]: [...lastTree] },
-        },
-        attributes: ['id'],
+      // const rs = await this.findAll({
+      //   where: {
+      //     id: { [Op.or]: [...lastTree] },
+      //   },
+      //   attributes: ['id'],
+      //   include: [
+      //     {
+      //       model: Product,
+      //       through: { attributes: [] },
+      //       attributes: [
+      //         'id',
+      //         'title',
+      //         'priceOrigin',
+      //         'priceSale',
+      //         'amount',
+      //         'status',
+      //         'summary',
+      //         'readCounter',
+      //       ],
+      //       where: sequelize.getWhere(query, '2'),
+      //       order: [[field, sort]],
+      //       include: [
+      //         {
+      //           model: ProductFile,
+      //           attributes: ['id', 'saveName', 'fileType', 'fieldNum'],
+      //           order: [
+      //             [ProductFile, 'fileType', 'ASC'],
+      //             [ProductFile, 'fieldNum', 'ASC'],
+      //           ],
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
+      const rs = await Product.findAll({
+        where: sequelize.getWhere(query, '2'),
+        // where: {
+        //   id: { [Op.or]: [...lastTree] },
+        // },
+        attributes: [
+          'id',
+          'title',
+          'priceOrigin',
+          'priceSale',
+          'amount',
+          'status',
+          'summary',
+          'readCounter',
+        ],
         include: [
           {
-            model: Product,
+            model: Cate,
             through: { attributes: [] },
-            attributes: [
-              'id',
-              'title',
-              'priceOrigin',
-              'priceSale',
-              'amount',
-              'status',
-              'summary',
-              'readCounter',
-            ],
-            where: sequelize.getWhere(query, '2'),
+            attributes: [['id', 'cid']],
+            where: { id: { [Op.or]: [...lastTree] } },
             order: [[field, sort]],
-            include: [
-              {
-                model: ProductFile,
-                attributes: ['id', 'saveName', 'fileType', 'fieldNum'],
-                order: [
-                  [ProductFile, 'fileType', 'ASC'],
-                  [ProductFile, 'fieldNum', 'ASC'],
-                ],
-              },
+          },
+          {
+            model: ProductFile,
+            attributes: ['id', 'saveName', 'fileType', 'fieldNum'],
+            order: [
+              [ProductFile, 'fileType', 'ASC'],
+              [ProductFile, 'fieldNum', 'ASC'],
             ],
           },
         ],
