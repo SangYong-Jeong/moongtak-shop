@@ -1,14 +1,14 @@
 const _ = require('lodash');
 const numeral = require('numeral');
+const { unescape } = require('html-escaper');
+const { dateFormat, relPath, relThumbPath } = require('../modules/util');
+const createPager = require('../modules/pager-init');
 const {
-  dateFormat,
-  relPath,
-  relThumbPath,
   findLastId,
   findObj,
+  findAllId,
+  findChildId,
 } = require('../modules/util');
-const createPager = require('../modules/pager-init');
-const { unescape } = require('html-escaper');
 
 module.exports = (sequelize, { DataTypes, Op }) => {
   const Product = sequelize.define(
@@ -118,7 +118,6 @@ module.exports = (sequelize, { DataTypes, Op }) => {
       const [allTree] = await Cate.getAllCate();
       const myTree = findObj(allTree, cid);
       const lastTree = findLastId(myTree, []);
-
       // pager
       let listCnt = 15;
       let pagerCnt = 5;
@@ -163,11 +162,19 @@ module.exports = (sequelize, { DataTypes, Op }) => {
     }
   };
 
-  Product.findProduct = async function (id, Cate, ProductFile) {
+  Product.findProduct = async function (
+    id,
+    { Cate, ProductFile, Color, Section }
+  ) {
     const rs = await this.findOne({
       where: { id },
       order: [[ProductFile, 'id', 'asc']],
-      include: [{ model: Cate }, { model: ProductFile }],
+      include: [
+        { model: Cate },
+        { model: ProductFile },
+        { model: Color },
+        { model: Section },
+      ],
     });
     const data = rs.toJSON();
     data.updatedAt = dateFormat(data.updatedAt, 'H');
