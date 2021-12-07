@@ -7,7 +7,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
         primaryKey: true,
         allowNull: true,
       },
-      Color_id: {
+      color_id: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         primaryKey: true,
         allowNull: true,
