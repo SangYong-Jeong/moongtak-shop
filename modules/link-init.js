@@ -10,7 +10,7 @@ module.exports = {
         src: 'b1',
       },
       {
-        path: ['/admin/prd', '/admin/cate'],
+        path: ['/admin/prd', '/admin/cate', '/admin/color', '/admin/section'],
         link: '/admin/prd',
         src: 'b2',
       },
