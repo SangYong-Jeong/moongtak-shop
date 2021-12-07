@@ -52,6 +52,10 @@ module.exports = (sequelize, { DataTypes, Op }) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      start: {
+        type: DataTypes.DECIMAL(1, 1),
+        allowNull: true,
+      },
       readCounter: {
         type: DataTypes.INTEGER(10).UNSIGNED,
         defaultValue: 0,
@@ -80,6 +84,22 @@ module.exports = (sequelize, { DataTypes, Op }) => {
         name: 'prd_id',
       },
       through: 'cate_product',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
+    Product.belongsToMany(models.Color, {
+      foreignKey: {
+        name: 'prd_id',
+      },
+      through: 'color_product',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
+    Product.belongsToMany(models.Section, {
+      foreignKey: {
+        name: 'prd_id',
+      },
+      through: 'section_product',
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
