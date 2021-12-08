@@ -23,11 +23,30 @@ router.get('/', async (req, res, next) => {
 router.put('/', isAdmin(7), async (req, res, next) => {
   try {
     const tree = await fs.writeJSON(
-      path.join(__dirname, '../../json/tree.json'),
+      path.join(__dirname, '../../json/tree.json'), // tree.json
       req.body.node
     );
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// JSON 바꾸기
+router.put('/:id', isAdmin(7), async (req, res, next) => {
+  try {
+    console.log(req.params, req.body);
+    const id = req.params.id;
+    const { parents, text } = req.body.data;
+    parents.pop();
+    await Cate.update(
+      { name: text, parents: parents.join(',') },
+      { where: { id: id } }
+    );
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -35,7 +54,8 @@ router.put('/', isAdmin(7), async (req, res, next) => {
 // DB 카테고리 등록
 router.post('/', isAdmin(7), async (req, res, next) => {
   try {
-    await Cate.create({ id: req.body.id });
+    let { id, name, parents } = req.body;
+    await Cate.create({ id, name, parents });
     res.status(200).json({ success: true });
   } catch (err) {
     console.log(err);
@@ -46,7 +66,6 @@ router.post('/', isAdmin(7), async (req, res, next) => {
 router.delete('/', isAdmin(8), tree(), async (req, res, next) => {
   try {
     const treeArray = findAllId(findObj(req.tree, req.body.id), []);
-    console.log(treeArray);
     await Cate.destroy({ where: { id: { [Op.or]: treeArray } } });
     await CateProduct.destroy({ where: { cate_id: { [Op.or]: treeArray } } });
     res.status(200).json({ success: true });
