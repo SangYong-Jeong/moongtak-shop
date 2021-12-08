@@ -111,13 +111,18 @@ module.exports = (sequelize, { DataTypes, Op }) => {
     });
   };
 
-  Product.findProducts = async function (query, Cate, ProductFile) {
+  Product.findProducts = async function (
+    query,
+    { Cate, Color, Section, ProductFile }
+  ) {
     try {
       let { field, sort, page = 1, search, grp, cid = 'j1_1' } = query;
       // tree
       const [allTree] = await Cate.getAllCate();
       const myTree = findObj(allTree, cid);
       const lastTree = findLastId(myTree, []);
+      console.log(lastTree);
+      console.log('=====================');
       // pager
       let listCnt = 15;
       let pagerCnt = 5;
@@ -145,6 +150,16 @@ module.exports = (sequelize, { DataTypes, Op }) => {
             attributes: [['id', 'cid']],
             where: { id: { [Op.or]: [...lastTree] } },
             order: [[field, sort]],
+          },
+          {
+            model: Color,
+            through: { attributes: [] },
+            attributes: ['id', 'name', 'code'],
+          },
+          {
+            model: Section,
+            through: { attributes: [] },
+            attributes: ['id', 'name', 'color'],
           },
           {
             model: ProductFile,
