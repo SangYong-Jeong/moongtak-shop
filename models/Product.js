@@ -145,7 +145,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
           {
             model: Cate,
             through: { attributes: [] },
-            attributes: [['id', 'cid']],
+            attributes: ['id', 'name', 'parents'],
             where: { id: { [Op.or]: [...endTree] } },
             order: [[field, sort]],
           },
