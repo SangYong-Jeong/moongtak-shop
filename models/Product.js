@@ -140,6 +140,7 @@ module.exports = (sequelize, { DataTypes, Op }) => {
           'status',
           'summary',
           'readCounter',
+          'star',
         ],
         include: [
           {
