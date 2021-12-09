@@ -25,6 +25,10 @@ Sequelize.prototype.getWhere = function ({ field, search }, status) {
         addrDetail: { [Op.like]: '%' + search + '%' },
       },
     };
+  } else if (field === 'section' && search !== '') {
+    where = {
+      '$Section.name$': search,
+    };
   } else {
     where = search ? { [field]: { [Op.like]: '%' + search + '%' } } : {};
   }
