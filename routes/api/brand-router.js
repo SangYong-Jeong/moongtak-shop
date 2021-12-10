@@ -8,7 +8,6 @@ const boardInit = require('../../middlewares/boardinit-mw');
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(req.query.id);
     const [list] = await BoardInit.findAll({
       where: { id: req.query.id },
       include: [
