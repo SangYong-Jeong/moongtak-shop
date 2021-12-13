@@ -189,7 +189,6 @@ function findAllId(_obj, arr) {
   arr.push(_obj.id);
   return arr;
 }
-
 module.exports = {
   location,
   cutTail,
