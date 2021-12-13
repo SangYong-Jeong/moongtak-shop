@@ -8,7 +8,7 @@ module.exports = {
       userid: 'mmaduu',
       userpw: await bcrypt.hash('000000' + salt, Number(round)),
       username: '최고관리자',
-      email: 'mmaf@gmail.com',
+      email: 'mmaf@naver.com',
       tel: '010-3333-8888',
       addrPost: '12345',
       addrRoad: '서울시 마포구 노고산로',
@@ -34,10 +34,10 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    for (let i = 0; i < 99; i++) {
+    for (let i = 0; i < 45; i++) {
       insertUsers.push({
         userid: 'test' + i,
-        userpw: await bcrypt.hash('111111' + salt, Number(round)),
+        userpw: await bcrypt.hash('222222' + salt, Number(round)),
         username: '테스트유저' + i,
         email: 'test' + i + '@test.com',
         tel: `010-7777-${numeral(i).format('0000')}`,
