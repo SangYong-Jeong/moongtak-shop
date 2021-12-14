@@ -189,6 +189,18 @@ function findAllId(_obj, arr) {
   arr.push(_obj.id);
   return arr;
 }
+
+// _obj의 자식들의 값을 리턴하는 재귀함수2
+function findAllId2(_obj, arr) {
+  if (_obj.children) {
+    for (let v of _obj.children) {
+      findAllId2(v, arr);
+    }
+  }
+  arr.push({ id: _obj.id, name: _obj.text });
+  return arr;
+}
+
 module.exports = {
   location,
   cutTail,
@@ -209,5 +221,6 @@ module.exports = {
   findLastId,
   findChildId,
   findAllId,
+  findAllId2,
   findObj,
 };

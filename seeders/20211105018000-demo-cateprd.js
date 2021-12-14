@@ -5,9 +5,7 @@ const _ = require('lodash');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const insertCatePrd = [];
-    const [jsonFile] = fs.readJsonSync(
-      path.join(__dirname, '../json/tree.json')
-    );
+    const [jsonFile] = fs.readJsonSync(path.join(__dirname, '../json/tree.json'));
     const cateIds = findLastId(jsonFile, []);
     for (let i = 1; i <= 100; i++) {
       let cates = _.shuffle(cateIds);

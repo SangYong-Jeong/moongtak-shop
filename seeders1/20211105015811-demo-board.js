@@ -30,7 +30,7 @@ module.exports = {
       // 241
       binit_id: 4,
       user_id: 1,
-      title: '메인 상단 배너 입니다.',
+      title: '메인 상단 배너 입니다. ',
       writer: '최고관리자',
       content:
         'New Arrivals|$399|Quisquemos sodales suscipit tortor condimentum de cosmo lacus meleifend menean blanditos.|/prd/1|L^^Best Production|$599|Quisquemos sodales suscipit tortor condimentum de cosmo lacus meleifend menean blanditos. suscipit tortor condimentum de cosmo|/prd/1|C^^Favorite Surf|$1,299|Sodales suscipit tortor condimentum de cosmo lacus meleifend menean blanditos. suscipit tortor condimentum de cosmo|/prd/3|R',
@@ -41,7 +41,7 @@ module.exports = {
       // 242
       binit_id: 4,
       user_id: 1,
-      title: '메인 패럴렉스 이미지 입니다.',
+      title: '메인 패럴렉스 이미지 입니다. ',
       writer: '최고관리자',
       content:
         'Stand Up Paddle Board|$499|Quisquemos sodales suscipit tortor condimentum de cosmo lacus meleifend menean blanditos.|/prd/4|R',
@@ -52,7 +52,7 @@ module.exports = {
       // 243
       binit_id: 4,
       user_id: 1,
-      title: '하단 배너',
+      title: '하단배너',
       writer: '최고관리자',
       content:
         'Let Surf!|Starting at 0% APR|Quisquemos sodales suscipit tortor condimentum de cosmo lacus meleifend menean blanditos.|/prd/5|R',
@@ -80,9 +80,9 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    for (let i = 0; i <= 11; i++) {
+    for (let i = 0; i < 10; i++) {
       insertGallery.push({
-        // 246 ~ 256
+        // 246 ~ 255
         binit_id: 3,
         user_id: 1,
         title: '관계사' + i,
